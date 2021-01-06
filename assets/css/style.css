@@ -1,0 +1,1059 @@
+/* RESET CSS */
+*, *::before, *::after {
+       padding: 0;
+       margin: 0;
+       box-sizing: border-box;
+}
+
+
+/************************************ Utility Components *********************************/
+:root {
+       /* Custom Font Size */
+       font-size: 62.5%;
+
+       /* Custom Colors */
+       --color-primary: #730039;
+       --color-primary-m-light: hsla(330, 100%, 23%, 0.55);
+       --color-primary-m-dark: hsla(330, 100%, 23%, 0.85);
+
+       --color-secondary: #ffc513;
+       --color-secondary-m-light: hsla(45, 100%, 54%, 0.55);
+       --color-secondary-m-dark: rgba(255, 196, 19, 0.85);
+
+       --color-tertiary: #ff724c;
+       --color-tertiary-m-light: hsla(13, 100%, 65%, 0.55);
+       --color-tertiary-m-dark: rgba(255, 115, 76, 0.85);
+
+       --color-quaternary: #f6eedf;
+       --color-quaternary-m-light: hsla(39, 56%, 92%, 0.55);
+       --color-quaternary-m-dark: hsla(39, 56%, 92%, 0.85);
+
+       /* Transtion Duration */
+       --transition-duration: 0.3s;
+
+       /* Section Title Font Size */
+       --font-size-title: calc(2rem + 2vw);
+
+       /* Section Padding */
+       --padding-section: 8vh 3vw;
+}
+
+::selection {
+       background-color: var(--color-primary);
+       color: #fff;
+}
+
+/* CUSTOM SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+       width: 2rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+       box-shadow: inset 0 0 5px grey;
+       border-radius: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+       background: var(--color-primary);
+       border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+       background: var(--color-secondary);
+}
+
+
+/* Anchor tags */
+a:link,
+a:visited {
+       color: var(--color-quaternary);
+       text-decoration: none;
+       font-size: calc(0.5rem + 1vw);
+       padding: 1rem 2rem;
+       border-radius: 0.3rem;
+       position: relative;
+       transition: all var(--transition-duration) cubic-bezier(1, 0, 0, 1);
+       z-index: 1;
+}
+
+/* Paragraphs */
+p {
+       color: white;
+       font-size: calc(1rem + 1vw);
+       font-weight: 200;
+}
+
+/* List Items */
+li {
+       list-style: none;
+       margin-bottom: 4rem;
+}
+
+/* Icons */
+i {
+       font-size: var(--font-size-title);
+       cursor: pointer;
+       color: #fff;
+       font-size: 2rem;
+}
+
+body {
+       font-family: "Titillium Web", sans-serif;
+       line-height: 1.7;
+       background-color: var(--color-quaternary);
+}
+
+.custom-container {
+       display: grid;
+       grid-template-columns: [container-start] 1fr [center-start] repeat(10, [col-start] minmax(min-content, 11rem) [col-end]) [center-end] 1fr [container-end] ;
+       grid-template-rows: 100vh repeat(8, min-content);
+}
+
+/**************************** Main Styling ***********************/
+
+/**************************** header ***********************/
+header#header {
+       background: linear-gradient(var(--color-primary-m-light),
+              var(--color-primary-m-light)), url('../images/hero.jpg') center no-repeat fixed;
+       background-size: cover;
+       grid-column: container-start / container-end;
+}
+
+/**************************** navbar styling ***********************/
+
+nav.nav {
+       position: fixed;
+       top: 0;
+       left: 0;
+       z-index: 2000;
+}
+
+nav.nav input[type="checkbox"] {
+       
+       z-index: 3000;
+       opacity: 0;
+       cursor: pointer;
+}
+
+nav.nav input[type="checkbox"], div.hamburger {
+       position: absolute;
+       top: 3rem;
+       left: 3rem;
+       width: 5rem;
+       height: 5rem;
+}
+
+div.hamburger {
+       padding: 1rem;
+       background-color: var(--color-secondary);
+       z-index: 2000;
+       display: grid;
+       place-items: center;
+       animation: hamburger 2s;
+}
+
+
+@keyframes hamburger {
+       0% {
+              transform: translateX(150rem) rotate(1800deg);
+              opacity: 0;
+       }
+       100% {
+              transform: translateX(0) rotate(0);
+              opacity: 1;
+       }
+}
+
+div.hamburger div {
+       position: relative;
+       width: 100%;
+       height: 0.3rem;
+       background-color: var(--color-quaternary);
+       transition: all var(--transition-duration) ease-in-out;
+}
+
+div.hamburger div::before,
+div.hamburger div::after {
+       content: "";
+       position: absolute;
+       top: -1rem;
+       width: 60%;
+       height: 100%;
+       background-color: var(--color-quaternary);
+}
+
+div.hamburger div::before {
+       left: 0;
+}
+
+div.hamburger div::after {
+       top: 1rem;
+       right: 0;
+}
+
+
+/**************************** rotation ***********************/
+
+nav.nav input[type="checkbox"]:checked + div.hamburger > div {
+       transform: rotate(135deg);
+}
+
+nav.nav input[type="checkbox"]:checked+div.hamburger>div::before {
+       left: 0;
+       top: 0;
+       width: 100%;
+       transform: rotate(270deg);
+
+}
+
+nav.nav input[type="checkbox"]:checked+div.hamburger>div::after {
+       opacity: 0;
+}
+
+nav.nav input[type="checkbox"]:checked:hover +div.hamburger>div {
+       transform: rotate(405deg);
+}
+
+div.navbar-menu {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       display: grid;
+       place-items: center;
+       background-color: var(--color-secondary-m-dark);
+       transform: scaleX(0);
+       transition: all 0.5s ease-in-out;
+       
+}
+
+div.navbar-menu ul li{
+     text-align: center;
+}
+
+div.navbar-menu ul li a {
+       font-size: 2rem;
+       color: rgba(0, 0, 0, 0.7);
+}
+
+nav.nav input[type="checkbox"]:checked ~ div.navbar-menu {
+       transform-origin: left right;
+       transform: scaleX(1);
+}
+
+div.navbar-menu ul li a:link, div.navbar-menu ul li a:visited {
+     z-index: 5;
+}
+
+div.navbar-menu ul li a:hover {
+       color: #fff;
+}
+
+div.navbar-menu ul li a:link::before, div.navbar-menu ul li a:visited::before {
+       content: "";
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       z-index: -1;
+       background-color: var(--color-primary);
+       transform: scaleY(0);
+       transition: transform var(--transition-duration) ease-in-out;
+}
+
+div.navbar-menu ul li a:hover::before, .div.navbar-menu ul li a:active::before {
+       transform: scaleY(1);
+       transform-origin: top bottom;
+       
+}
+
+/************************* Navbar Styling Ends Here ***********************/
+
+/************************* header content styling ***********************/
+
+div.header-content {
+       height: calc(100vh - 91.14px);
+       display: grid;
+       place-items: center;
+       color: #fff;
+}
+
+div.logo {
+       display: grid;
+       place-items: center;
+}
+
+div.logo a span {
+       color: var(--color-tertiary);
+       font-size: 3rem;
+       font-family: "Times New Roman", Times, serif;
+}
+
+div.content h1 {
+       font-size: calc(4rem + 4vw);
+       font-weight: 300;
+       text-transform: uppercase;
+       padding: 0 2rem 0 var(--font-size-title);
+}
+
+div.content p {
+       font-size: calc(1rem + 1vw);
+       font-weight: 500;
+       padding: 2vh 2rem 6vh var(--font-size-title)
+}
+
+div.content a {
+       margin-left: var(--font-size-title);
+       border: 0.2rem solid var(--color-tertiary);
+       font-size: 1.8rem;
+}
+
+div.content a:hover {
+       color: #fff;
+}
+
+div.content a:link::before,
+div.content a:visited::before {
+       content: "";
+       position: absolute;
+       top: 0;
+       left: 0;
+       height: 100%;
+       width: 100%;
+       background-color: var(--color-tertiary);
+       transform: scaleX(0);
+       transition: transform 0.45s cubic-bezier(1, 0, 0, 1);
+       z-index: -1;
+}
+
+div.content a:hover::before,
+div.content a:active::before {
+       transform: scaleX(1);
+       
+}
+
+/**************************** Booking Content Section ***********************/
+
+section#booking-content {
+       padding: var(--padding-section);
+}
+
+.booking-content h2 {
+       font-size: var(--font-size-title);
+       padding: 0 2rem 1rem;
+       font-weight: 300;
+       position: relative;
+
+}
+
+.booking-content h2::after {
+       content: "";
+       position: absolute;
+       bottom: -20%;
+       left: 15%;
+       height: 0.2rem;
+       width: 30%;
+       background-color:  var(--color-secondary);
+}
+
+.booking-content p {
+       padding: 2rem;
+       text-align: justify;
+       color: var(--color-primary);
+       margin-top: 3rem;
+       font-size: 2rem;
+}
+
+div.info p i {
+       color: var(--color-secondary);
+}
+
+div#card {
+    border: none;
+}
+
+div#card-header {
+       background-color: #fff;
+}
+div.card h4 {
+       font-size: calc(1rem + 1vw);
+       text-align: center;
+       margin-bottom: 3rem;
+}
+
+#card div.card-body {
+       background-color: var(--color-secondary);
+       display: flex;
+       flex-direction: column;
+       place-items: center;
+       position: relative;
+}
+
+#card div.card-body::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        border-width: 1.5rem;
+        margin-left: -1.5rem;
+        border-style: solid;
+        border-color: transparent transparent var(--color-secondary) transparent;
+}
+
+#card div.card-body p {
+       color: #fff;
+}
+#card div.card-body p.date {
+       font-size: 3rem;
+       font-weight: 700
+}
+
+div.reservation-content a {
+       background-color: var(--color-secondary);
+       color: white;
+       font-size: 2rem;
+       transition: all var(--transition-duration) ease-in-out;
+}
+
+div.reservation-content a:hover,
+div.reservation-content a:active {
+       color: var(--color-secondary);
+       background-color: white;
+       border: 0.1rem var(--color-secondary) solid;
+}
+
+div.reservation-content div p{
+       color: var(--color-primary);
+       font-size: 2rem;
+}
+
+/**************************** Booking Villas Section ***********************/
+
+.villas-col div.card {
+   padding: 2rem;
+   transition: all 0.5s ease-in-out;
+}
+
+.villas-col div.card h2 {
+       font-size: var(--font-size-title);
+       padding: 0 2rem 1rem 0;
+       font-weight: 400;
+}
+
+.villas-col div.card p {
+       font-size: 2rem;
+       margin: 1.5rem 0 4rem 0;
+       color: white;
+       text-align: justify;
+}
+
+.villas-col  div.card a:link,
+.villas-col div.card a:visited {
+       display: inline-block;
+       width: 50%;
+       margin-bottom: 2rem;
+       font-size: 1.5rem;
+       background-color: white;
+       color: var(--color-primary);
+       z-index: 1;
+       overflow: hidden;
+}
+
+.villas-col div.card a:hover,
+.villas-col div.card a:active {
+       color: #fff;
+}
+
+.villas-col div.card a:link::before,
+.villas-col div.card a:visited::before {
+       content: "";
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       width: 100%;
+       height: 0;
+       z-index: -1;
+       background-color: var(--color-secondary);
+       transition: height var(--transition-duration) ease-in-out;
+}
+
+
+.villas-col div.card a:link::before,
+.villas-col div.card a:visited::before {
+     transform: translate(-50%, -50%) rotate(45deg)
+}
+
+.villas-col div.card a:active::before,
+.villas-col div.card a:hover::before {
+       height: 400%;
+}
+
+.villa-1, .villa-2, .villa-3, .villa-4, .villa-5, .villa-6 {
+       background-position: center;
+       background-size: cover;
+       background-repeat: no-repeat;
+       width: 100%;
+       height: 100%;
+}
+
+.villa-1 {
+       background: linear-gradient(var(--color-primary-m-light), var(--color-tertiary-m-light)),
+       url("../images/Villas/villa-1.jpg");
+}
+
+.villa-2 {
+       background: linear-gradient(var(--color-primary-m-light), var(--color-tertiary-m-light)),
+       url("../images/Villas/villa-2.jpg");
+}
+
+.villa-3 {
+       background: linear-gradient(var(--color-primary-m-light), var(--color-tertiary-m-light)),
+              url("../images/Villas/villa-3.jpg");
+}
+
+.villa-4 {
+       background: linear-gradient(var(--color-primary-m-light), var(--color-tertiary-m-light)),
+              url("../images/Villas/villa-4.jpg");
+}
+
+.villa-5 {
+       background: linear-gradient(var(--color-primary-m-light), var(--color-tertiary-m-light)),
+              url("../images/Villas/villa-5.jpg");
+}
+
+.villa-6 {
+       background: linear-gradient(var(--color-primary-m-light), var(--color-tertiary-m-light)),
+              url("../images/Villas/villa-6.jpg");
+}
+
+.villas-col div.card:hover {
+       transform: scale(0.98);
+       filter: sepia(50%) grayscale(50%);
+}
+/**************************** Motto Section ***********************/
+
+section#motto {
+      background-color: var(--color-primary);
+      padding: 10vh 3vw;
+}
+
+h2.motto-heading {
+       position: relative;
+}
+
+h2.motto-heading::after {
+       content: "";
+       position: absolute;
+       bottom: -30%;
+       left: 45%;
+       height: 0.2rem;
+       width: 10%;
+       background-color: white;
+}
+
+
+
+/**************************** Event Content Section ***********************/
+
+div.events-col div.card, div.features-col div.card {
+       background-position: center;
+       background-size: cover;
+       background-repeat: no-repeat;
+       padding: var(--padding-section);
+}
+
+div.events-col div.card div.card-body p, div.features-col div.card div.card-body p {
+      font-size: 2rem;
+}
+
+div#events-header, div#feature-header {
+       border-bottom: none;
+}
+div.events-1 {
+     background: linear-gradient(var(--color-tertiary-m-light), var(--color-tertiary-m-light)),
+     url("../images/Events/beach-party.jpg");
+     color: #fff;
+     cursor: pointer;
+     border-right: 0.3rem solid var(--color-tertiary);
+}
+
+div.events-2 {
+    background: linear-gradient(var(--color-tertiary-m-light), var(--color-tertiary-m-light)),
+    url("../images/Events/culture-discovery.jpg");
+    cursor: pointer;
+}
+
+div.events-text-col {
+       background-color: var(--color-tertiary);
+       
+}
+
+h2.events-title, h2.features-title {
+       position: relative;
+       font-weight: 500;
+       transform: rotate(90deg);
+       top: 20rem;
+}
+
+h2.events-title a, h2.gallery-title a, h2.features-title a {
+       font-size: 4rem;
+}
+
+h2.events-title a:hover {
+       color: var(--color-primary);
+}
+
+/**************************** Gallery Section ***********************/
+section#gallery-content {
+       width: 100%;
+       height: 90vh;
+       overflow: hidden;
+}
+
+div.gallery-text-col {
+       background-color: var(--color-primary);
+       height: 90vh;
+}
+
+div.gallery-carousel-col {
+     border: 0.2rem solid var(--color-secondary);
+     position: relative;
+     overflow: hidden;
+}
+
+div.gallery-carousel {
+       width: 100%;
+       height: 100%;
+       position: relative;
+}
+
+h2.gallery-title  {
+       transform: rotate(-90deg);
+       position: relative;
+       top: 23rem;
+       
+}
+
+h2.gallery-title a:hover {
+       color: var(--color-secondary)
+}
+
+/* Carousel Buttons */
+.carousel-button {
+       position: absolute;
+       top: 50%;
+       transform: translateY(-50%);
+       background: transparent;
+       border: none;
+       outline: none;
+       cursor: pointer;
+       z-index: 1;
+}
+
+ul.gallery-carousel-list {
+      padding: 0;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      transition: transform 1s ease-in-out;
+}
+
+ul.gallery-carousel-list li {
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       
+}
+ul.gallery-carousel-list li img {
+       background-position: center;
+       width:100%;
+       height: 100%;
+       object-fit: cover;
+       background-repeat: no-repeat;
+}
+
+.carousel-button {
+       position: absolute;
+       top: 50%;
+       z-index: 1;
+       cursor: pointer;
+       padding: 1rem;
+       transform: translateY(-50%);
+}
+
+.carousel-button i {
+       color: var(--color-tertiary);
+       font-size: var(--font-size-title);
+}
+
+/* Button Right */
+.carousel-button-right {
+       right: 0;
+}
+
+div.carousel-nav {
+       position: absolute;
+       bottom: 0;
+       left: 50%;
+       height: 5%;
+       margin-bottom: 1rem;
+       display: flex;
+       flex-wrap: wrap;
+       transform: translateX(-50%);
+}
+
+div.carousel-nav button {
+     border-radius: 50%;
+     background-color: var(--color-secondary);
+     height: 2rem;
+     width: 2rem;
+     outline: none;
+     border: none;
+     margin-right: 2rem;
+     margin-bottom: 1rem;
+}
+
+.active-button {
+       background-color: var(--color-primary) !important;
+}
+
+.hidden {
+       display: none;
+}
+/**************************** Features Content Section ***********************/
+
+.feature-1, .feature-2 {
+       cursor: pointer;
+}
+.feature-1 {
+       background: linear-gradient(var(--color-secondary-m-light),
+              var(--color-secondary-m-light)),
+       url("../images/Features/surfing.jpg");
+       border-right: solid 0.4rem var(--color-secondary) !important;
+}
+
+.feature-2 {
+       background: linear-gradient(var(--color-secondary-m-light),
+                     var(--color-secondary-m-light)),
+              url("../images/Features/cocktail.jpg");
+}
+
+div.features-col div.card div.card-body p {
+       color: #000;
+}
+
+div.features-text-col {
+       background-color: var(--color-secondary-m-dark);
+}
+
+h2.features-title {
+     top: 18rem;
+}
+
+h2.features-title a {
+       color: #000;
+}
+
+h2.features-title a:hover {
+       color: #ff724c;
+}
+
+/**************************** testimonials Section ***********************/
+
+.testimonial-card {
+       
+       height: 50rem;
+       position: relative;
+       border: none !important;
+}
+
+div.testimonial-card-front, div.testimonial-card-back{
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       transition: all 1s ease-in-out;
+       backface-visibility: hidden;
+       transform: perspective(100rem);
+
+       display: flex;
+       justify-content: center;
+       align-items: start;
+       padding: 3rem;
+}
+
+div.testimonial-card-front {
+       z-index: 1000;
+}
+
+.testimonial-card-front h2 {
+       background-color: var(--color-secondary-m-light);
+       padding: 1rem;
+       border-bottom-right-radius: 50%;
+       border-bottom-left-radius: 50%;
+}
+
+.testimonial-card:hover .testimonial-card-front {
+       transform: perspective(100rem) rotateY(0.5turn);
+}
+
+.testimonial-card-back {
+       transform: perspective(100rem) rotateY(0.5turn);
+       background-color: var(--color-primary);
+}
+
+.testimonial-card:hover .testimonial-card-back {
+       transform: perspective(100rem) rotateY(1turn);
+}
+
+.testimonial-card-back p {
+       place-self: center;
+       font-size: 2rem;
+       font-weight: 400;
+}
+
+.testimonials-col:first-child div.card .testimonial-card-front {
+       background: url('../images/Testimonials/testimonials-1.jpg');
+       
+}
+
+.testimonials-col:nth-child(2) div.testimonial-card .testimonial-card-front {
+       background-image: url("../images/Testimonials/testimonials-2.jpg");
+}
+
+.testimonials-col:nth-child(3) div.testimonial-card .testimonial-card-front {
+       background-image: url("../images/Testimonials/testimonials-3.jpg");
+}
+
+.testimonials-col:nth-child(4) div.testimonial-card .testimonial-card-front {
+       background-image: url("../images/Testimonials/testimonials-4.jpg");
+}
+
+.testimonials-col:nth-child(5) div.testimonial-card .testimonial-card-front {
+       background-image: url("../images/Testimonials/testimonials-5.jpg");
+}
+
+.testimonials-col:nth-child(6) div.testimonial-card .testimonial-card-front {
+       background-image: url("../images/Testimonials/testimonials-6.jpg");
+}
+
+.testimonials-col:first-child div.testimonial-card .testimonial-card-front,
+.testimonials-col:nth-child(2) div.testimonial-card .testimonial-card-front,
+.testimonials-col:nth-child(3) div.testimonial-card .testimonial-card-front,
+.testimonials-col:nth-child(4) div.testimonial-card .testimonial-card-front,
+.testimonials-col:nth-child(5) div.testimonial-card .testimonial-card-front,
+.testimonials-col:nth-child(6) div.testimonial-card .testimonial-card-front {
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+}
+/**************************** Gallery Carousel Section ***********************/
+
+footer {
+       background-color: var(--color-primary);
+}
+
+footer div.footer-content {
+       display: flex;
+       flex-wrap: wrap;
+       padding: 6vh 4vw;
+       justify-content: space-between;
+       align-items: center;
+}
+
+footer div.social-icons a:link, footer div.social-icons a:visited{
+       background-color: var(--color-secondary);
+       border-radius: 4rem;
+       margin-right: 1rem;
+       box-shadow: 0.5rem 0.5rem 2rem 0.5rem var(--color-secondary-m-light),
+       -0.5rem -0.5rem 2rem 0.5rem var(--color-secondary-m-light);
+       transform: scale(0.8);
+       animation: social 3s linear infinite;
+}
+
+footer div.social-icons a i {
+       font-size: 2rem;
+       color: var(--color-primary);
+}
+
+@keyframes social {
+       0% {
+              opacity: 0;
+       }
+
+       50% {
+              opacity: 1;
+              transform: scale(1.2);
+       }
+
+       100% {
+              opacity: 0;
+       }
+}
+
+footer div.social-icons a:link:nth-child(1),
+footer div.social-icons a:visited:nth-child(1) {
+       animation-delay: 0s;
+}
+
+footer div.social-icons a:link:nth-child(2),
+footer div.social-icons a:visited:nth-child(2) {
+       animation-delay: 0.3s;
+}
+
+footer div.social-icons a:link:nth-child(3),
+footer div.social-icons a:visited:nth-child(3) {
+       animation-delay: 0.6s;
+}
+
+footer div.social-icons a:link:nth-child(4),
+footer div.social-icons a:visited:nth-child(4) {
+       animation-delay: 0.9s;
+}
+
+i.fas.fa-facebook {
+       font-size: 2rem;
+       color: var(--color-primary);
+}
+
+
+@media screen and (min-width:250px) and (max-width:600px) {
+         
+        div.events-text-col, div.gallery-text-col, div.features-text-col {
+               order: -1;
+               height: 100%;
+        }
+
+        div.features-text-col {
+               margin-bottom: 1rem;
+        }
+
+        div.events-text-col h2, div.gallery-text-col h2, div.features-text-col h2{
+               transform: rotate(0);
+               position: static;
+               text-align: center;
+        }
+       
+
+        div.reservation-content {
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: center;
+        }
+
+        div.reservation-content div p {
+               text-align: center;
+        }
+
+        div.villas-col,
+        div.features-col,
+        div.events-col,
+        div.events-text-col {
+               margin-bottom: 3rem
+        }
+
+        div.villas-col .card:hover {
+               transform: scale(1.02);
+        }
+        
+        div.footer-content p {
+               margin: 0 auto;
+               margin-bottom: 2rem;
+        }
+        
+        div.social-icons {
+               margin: 0 auto;
+        }
+       
+        ul.gallery-carousel-list {
+              width: 100vw;
+              height:100vh;
+        }
+        
+        div.carousel-nav {
+               display: none;
+        }
+}
+
+@media screen and (min-width:601px) and (max-width: 770px) {
+          div.reservation-content {
+                 display: flex;
+                 flex-direction: column;
+                 justify-content: center;
+                 align-items: center;
+          }
+
+          div.reservation-content div p {
+                 text-align: center;
+          }
+
+          div.villas-col,
+          div.events-1,
+          div.events-2,
+          div.events-text-col, 
+          div.features-text-col,
+          div.features-col {
+                 margin-bottom: 1rem;
+          }
+
+          ul.gallery-carousel-list {
+                 width: 100vw;
+                 height: 100vh;
+          }
+
+          div.carousel-nav {
+                 display: none;
+          }
+
+          div.footer-content p {
+                 margin: 0 auto;
+                 margin-bottom: 2rem;
+          }
+
+          div.social-icons {
+                 margin: 0 auto;
+          }
+
+}
+
+@media screen and (min-width:601px) and (max-width:989px) {
+       div.events-text-col, div.features-text-col {
+              order: -1;
+       }
+
+       div.events-text-col h2,
+       div.features-text-col h2,
+       div.gallery-text-col h2 {
+              transform: rotate(0);
+              position: static;
+              text-align: center;
+       }
+
+       div.carousel-nav button {
+              margin-right: 1rem;
+       }
+       
+       div.gallery-text-col {
+           height: 100%;
+       }
+
+       ul.gallery-carousel-list {
+              width: 100vw;
+              height: 100vh;
+       }
+
+       div.carousel-nav {
+              bottom: 13rem;
+       }
+
+}
